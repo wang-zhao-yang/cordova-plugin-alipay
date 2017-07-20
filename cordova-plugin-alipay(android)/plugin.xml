@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-alipay"
+	version="5.3.0">
+	<name>AlipayPlugin</name>
+	<engines>
+		<engine name="cordova" version=">=3.5.0" />
+	</engines>
+
+	<js-module src="www/alipay.js" name="alipay">
+		<clobbers target="navigator.alipay" />
+	</js-module>
+
+	<!-- android -->
+	<platform name="android">
+
+		<source-file
+			src="src/android/com/yoopoon/cordova/plugin/alipay/Alipay.java"
+			target-dir="src/com/yoopoon/cordova/plugin/alipay" />
+		<source-file
+			src="src/android/com/yoopoon/cordova/plugin/alipay/Base64.java"
+			target-dir="src/com/yoopoon/cordova/plugin/alipay" />
+		<source-file
+			src="src/android/com/yoopoon/cordova/plugin/alipay/Result.java"
+			target-dir="src/com/yoopoon/cordova/plugin/alipay" />
+		<source-file
+			src="src/android/com/yoopoon/cordova/plugin/alipay/SignUtils.java"
+			target-dir="src/com/yoopoon/cordova/plugin/alipay" />
+
+		<source-file src="src/android/alipaySdk-20170309.jar" target-dir="libs" />
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="Alipay">
+				<param name="android-package" value="com.yoopoon.cordova.plugin.alipay.Alipay" />
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<!-- weixin sdk begin -->
+			<activity android:name="com.alipay.sdk.app.H5PayActivity"
+				android:configChanges="orientation|keyboardHidden|navigation"
+				android:exported="false" android:screenOrientation="behind"
+				android:windowSoftInputMode="adjustResize|stateHidden">
+			</activity>
+			 <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+			<!-- weixin sdk end -->
+		</config-file>
+	</platform>
+</plugin>
